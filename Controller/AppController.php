@@ -44,7 +44,7 @@ class AppController extends Controller {
     public $helpers = array('Html', 'Form', 'Session', 'Js'=>'Jquery');
 
     function beforeFilter() {
-//        $this->Auth->allow(array('display', 'home'));
+        $this->Auth->allow(array('display'));
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
         $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
@@ -55,7 +55,7 @@ class AppController extends Controller {
     
     function _userInfo() {
         $userInfo = array();
-        $fields = array('id', 'username', 'first_name', 'middle_name', 'last_name', 'group_id');
+        $fields = array('id', 'username', 'first_name', 'middle_name', 'last_name', 'group_id', 'position_id');
         if($this->Auth->user()){
             for($i = 0; $i < count($fields); $i++) $userInfo[$fields[$i]] = $this->Auth->user($fields[$i]);
         }
