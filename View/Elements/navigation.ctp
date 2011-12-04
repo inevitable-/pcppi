@@ -3,7 +3,7 @@
 </div>
 <div id="navigation" class="box">
     <ul>
-        <li><?php echo $this->Html->link(__('Home', true), array('controller'=>'pages', 'action'=>'display', 'home'));?></li>
+        <li><?php echo $this->Html->link(__('Home', true), array('controller'=>'pages', 'action'=>'display', 'homepage'));?></li>
         <?php if($userInfo['group_id'] == ADMINISTRATOR): ?>
             <li><?php echo $this->Html->link(__('Master Files', true), array('controller'=>'users', 'action'=>'index'));?></li>
         <?php elseif($userInfo['group_id'] == ACCOUNTING || $userInfo['group_id'] == REGULAR): ?>
