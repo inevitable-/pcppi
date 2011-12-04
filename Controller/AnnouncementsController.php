@@ -13,6 +13,11 @@ class AnnouncementsController extends AppController {
  *
  * @return void
  */
+    
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow(array('*'));
+        }
 	public function index() {
 		$this->Announcement->recursive = 0;
 		$this->set('announcements', $this->paginate());
@@ -99,4 +104,17 @@ class AnnouncementsController extends AppController {
 		$this->Session->setFlash(__('Announcement was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+        
+        public function summary() {
+            
+            $this->Announcement->Behaviors->attach('Containable');
+//            $this->Announcement->User->Behaviors->attach('Containable');
+            $userInfo = $this->_userInfo();
+
+            $user = $this->Announcement->User->find('all', array('contain'=>array('Position', 'Department'), 'conditions'=>array('User.id'=>$userInfo['id'])));
+            $user = $user[0];
+            
+            $announcements = $this->Announcement->find('all', array('contain'=>array('User'), 'order'=>array('Announcement.created DESC'), 'limit'=>3));
+            $this->set(compact('announcements','user'));
+        }
 }

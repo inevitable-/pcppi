@@ -47,7 +47,7 @@ class AppController extends Controller {
         $this->Auth->allow(array('display'));
         $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
+        $this->Auth->loginRedirect = array('controller' => 'announcements', 'action' => 'summary');
         
         $userInfo = $this->_userInfo();
         $this->set(compact('userInfo'));
